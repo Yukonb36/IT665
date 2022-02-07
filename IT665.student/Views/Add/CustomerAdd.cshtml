@@ -1,0 +1,123 @@
+﻿
+@model IT665.Models.Add.CustomerAdd
+
+
+<div class="jumbotron">
+    <h1>Customer Add</h1>
+    <p>Please enter customer details</p>
+</div>
+<h2>Search Form</h2>
+<form method="post">
+    <fieldset class="form-group @(ViewData.ModelState.IsValid ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="nameStyle" class="control-label">Name Style</label>
+        </div>
+        <span class="col-sm-5">
+
+            @Html.DropDownList("nameStyle", new List<SelectListItem>()
+        {
+            new SelectListItem() { Text= "Western", Value = "0"},
+            new SelectListItem() { Text= "Eastern", Value = "1"}
+            }, "Select ...")
+            <small class="text-muted">Defaults to Western. </small>
+        </span>
+        <span class="has-error control-label col-sm-7">@Html.ValidationMessageFor(Model => Model.nameStyle)</span>
+    </fieldset>
+    <fieldset class="form-group @(ViewData.ModelState.IsValid ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="title" class="control-label">Title</label>
+        </div>
+        <span class="col-sm-5">
+            <input type="text" class="form-control" name="title" id="title" placeholder="Title" value="@Model.title">
+            <small class="text-muted">Please enter the title of the new customer or leave blank </small>
+        </span>
+        <span class="has-error control-label col-sm-7">@Html.ValidationMessageFor(Model => Model.title)</span>
+    </fieldset>
+    <fieldset class="form-group @(ViewData.ModelState.IsValid ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="firstName" class="control-label">First Name</label>
+        </div>
+        <span class="col-sm-5">
+            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Full First Name" value="@Model.firstName">
+            <small class="text-muted">Please enter the full first name of the new customer </small>
+        </span>
+        <span class="has-error control-label col-sm-7">@Html.ValidationMessageFor(Model => Model.firstName)</span>
+    </fieldset>
+    <fieldset class="form-group @(ViewData.ModelState.IsValid ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="middleName" class="control-label">Middle Name</label>
+        </div>
+        <span class="col-sm-5">
+            <input type="text" class="form-control" name="middleName" id="middleName" placeholder="Middle Name or Initial" value="@Model.middleName">
+            <small class="text-muted">Please enter the middle name or inital of the new customer or leave blank </small>
+        </span>
+        <span class="has-error control-label col-sm-7">@Html.ValidationMessageFor(Model => Model.middleName)</span>
+    </fieldset>
+    <fieldset class="form-group @(ViewData.ModelState.IsValid ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="lastName" class="control-label">Last Name</label>
+        </div>
+        <span class="col-sm-5">
+            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Full Last Name" value="@Model.lastName">
+            <small class="text-muted">Please enter the full last name of the new customer </small>
+        </span>
+        <span class="has-error control-label col-sm-7">@Html.ValidationMessageFor(Model => Model.lastName)</span>
+    </fieldset>
+
+
+    <fieldset class="form-group @(ViewData.ModelState.IsValid ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="suffix" class="control-label">Suffix</label>
+        </div>
+        <span class="col-sm-5">
+            <input type="text" class="form-control" name="suffix" id="suffix" placeholder="Suffix" value="@Model.suffix">
+            <small class="text-muted">Please enter the suffix of the customer or leave blank </small>
+        </span>
+        <span class="has-error control-label col-sm-7">@Html.ValidationMessageFor(Model => Model.suffix)</span>
+    </fieldset>
+    <fieldset class="form-group @(ViewData.ModelState.IsValid ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="emailPromotion" class="control-label">Email Promotion</label>
+        </div>
+        <span class="col-sm-5">
+
+            @Html.DropDownList("emailPromotion", new List<SelectListItem>()
+        {
+            new SelectListItem() { Text= "Contact does not wish to receive e-mail promotions", Value = "0"},
+            new SelectListItem() { Text= "Contact does wish to receive e-mail promotions from AdventureWorks", Value = "1"},
+            new SelectListItem() { Text= "Contact does wish to receive e-mail promotions from AdventureWorks and selected partners", Value = "2"}
+            }, "Select ...")
+            <small class="text-muted">Defaults to no email promotions. </small>
+        </span>
+        <span class="has-error control-label col-sm-7">@Html.ValidationMessageFor(Model => Model.emailPromotion)</span>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <hr />
+
+    }
+    @if (Model.Results != null)
+    {
+        <div class="">
+            <h2>Results : @Model.Results.Count</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                </tfoot>
+                <tbody>
+                    @for (int i = 0; i < Model.Results.Count(); i++)
+                    {
+                        <tr>
+                            <td>@Html.DisplayTextFor(m => m.Results[i].firstName)</td>
+                            <td>@Html.DisplayTextFor(m => m.Results[i].lastName)</td>
+                        </tr>
+                    }
+            </table>
+        </div>
+    }
+
+</form>

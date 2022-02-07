@@ -1,0 +1,31 @@
+﻿@model IT665.Models.Login.Login
+
+<div class="jumbotron">
+    <h1>Log In</h1>
+    <p>Please enter username and password   </p>
+ </div>
+<form method="post">
+
+    <fieldset class="form-group @(ViewData.ModelState.IsValidField("UserName") ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="userName" class="control-label">User Name</label>
+        </div>
+        <span class="col-sm-4">
+            <input type="text" class="form-control" name="userName" id="userName" placeholder="User Name" value="@Model.UserName">
+        </span>
+        <span class="has-error control-label col-sm-8">@Html.ValidationMessageFor(Model => Model.UserName)</span>
+    </fieldset>
+    <fieldset class="form-group @(ViewData.ModelState.IsValidField("Password") ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="password" class="control-label">Password</label>
+        </div>
+        <span class="col-sm-4">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="@Model.Password">
+        </span>
+        <div class="has-error control-label col-sm-8">@Html.ValidationMessageFor(Model => Model.Password)</div>
+    </fieldset>
+    <fieldset class="form-group @(ViewData.ModelState.IsValidField("Login") ? "" : "has-error")">
+        <h3></h3><span class="has-error control-label col-sm-12 ">@Html.ValidationMessage("Login")</span></h3>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

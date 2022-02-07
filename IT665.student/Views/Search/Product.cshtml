@@ -1,0 +1,51 @@
+﻿
+@model IT665.Models.Search.ProductSearch
+<div class="jumbotron">
+    <h1>Product Search</h1>
+    <p>Please enter part of the product name to search</p>
+</div>
+
+<h2>Search Form</h2>
+<form method="post">
+
+
+
+    <fieldset class="form-group @(ViewData.ModelState.IsValid ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="paritalProductName" class="control-label">Part of Last Name</label>
+        </div>
+        <span class="col-sm-5">
+            <input type="text" class="form-control" name="partialProductName" id="partialProductName" placeholder="ProductName" value="@Model.PartialProductName">
+            <small class="text-muted">for example: 'mountain' will match 'Mountain Frame' and 'ML Mountain Frame', but not 'touring' </small>
+        </span>
+        <span class="has-error control-label col-sm-7">@Html.ValidationMessageFor(Model => Model.PartialProductName)</span>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <hr />
+    @if (Model.Results != null)
+    {
+<div class="">
+    <h2>Results : @Model.Results.Count</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ProductID</th>
+            </tr>
+        </thead>
+        <tfoot>
+        </tfoot>
+        <tbody>
+            @for (int i = 0; i < Model.Results.Count(); i++)
+            {
+                <tr>
+                    <td>@Html.DisplayTextFor(m => m.Results[i].Name)</td>
+                    <td>@Html.DisplayTextFor(m => m.Results[i].ProductId)</td>
+                </tr>               
+            }
+    </table>
+</div>}
+
+</form>
+
+@*PRODUCT IMPLEMENTATION TODO: Create the Product Search view.  Use Customer.cshtml as a guide.*@

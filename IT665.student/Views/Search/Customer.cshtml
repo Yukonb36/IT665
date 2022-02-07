@@ -1,0 +1,51 @@
+﻿
+@model IT665.Models.Search.CustomerSearch
+
+
+<div class="jumbotron">
+    <h1>Customer Search</h1>
+    <p>Please enter part of the customer's last name to search</p>
+</div>
+<h2>Search Form</h2>
+<form method="post">
+
+
+
+    <fieldset class="form-group @(ViewData.ModelState.IsValid ? "" : "has-error")">
+        <div class="col-sm-12">
+            <label for="partialLastName" class="control-label" >Part of Last Name</label>
+        </div>
+        <span class="col-sm-5">
+           <input type="text" class="form-control" name="partialLastName" id="partialLastName" placeholder="Part of Last Name" value="@Model.PartialLastName">
+            <small class="text-muted">for example: 'smi' will match 'smithers' and 'smith', but not 'jasmine' </small>
+        </span>
+        <span class="has-error control-label col-sm-7">@Html.ValidationMessageFor(Model => Model.PartialLastName)</span>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <hr />
+    @if(Model.Results != null)
+    { 
+    <div class="">
+        <h2>Results : @Model.Results.Count</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>FirstName</th>
+                </tr>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <tbody>
+                @for (int i = 0; i < Model.Results.Count(); i++)
+                {
+                    <tr>
+                        <td>@Html.DisplayTextFor(m => m.Results[i].LastName)</td>
+                        <td>@Html.DisplayTextFor(m => m.Results[i].FirstName)</td>
+                    </tr>
+                }
+        </table>
+    </div>
+    }
+
+</form>
